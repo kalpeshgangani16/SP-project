@@ -94,7 +94,7 @@ def create_booking(request, flight_id):
     
     return render(request, 'booking_form.html', {'form': form, 'flight': flight, 'available_seats': available_seats})
 
-
+#logout view
 def logout_view(request):
     logout(request)
     return redirect('flight_booking:home')
