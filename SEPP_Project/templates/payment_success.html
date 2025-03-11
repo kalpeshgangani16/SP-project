@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Payment Successful{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h3>Payment Successful</h3>
+    </div>
+    <div class="card-body">
+        <p>Thank you for your payment. Your booking has been confirmed.</p>
+        <a href="{% url 'flight_booking:ticket_view' booking.id %}">View Ticket</a>
+    </div>
+</div>
+{% endblock %}

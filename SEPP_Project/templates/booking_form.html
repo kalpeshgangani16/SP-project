@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Book Flight{% endblock %}
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h3>Book Flight</h3>
+    </div>
+    <div class="card-body">
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <h4>Flight Details</h4>
+                <p><strong>Airline:</strong> {{ flight.airline }}</p>
+                <p><strong>From:</strong> {{ flight.departure_city }}</p>
+                <p><strong>To:</strong> {{ flight.arrival_city }}</p>
+                <p><strong>Departure:</strong> {{ flight.departure_time }}</p>
+                <p><strong>Price:</strong> ${{ flight.price }}</p>
+            </div>
+        </div>
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="{{ form.seat_number.id_for_label }}" class="form-label">Select Seat</label>
+                {{ form.seat_number }}
+            </div>
+            {% if form.seat_number.errors %}
+            <div class="alert alert-danger">{{ form.seat_number.errors }}</div>
+            {% endif %}
+            <button type="submit" class="btn btn-primary">Confirm Booking</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

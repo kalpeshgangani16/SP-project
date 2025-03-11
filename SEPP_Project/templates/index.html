@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="mb-4">Welcome to the Flight Booking System</h2>
+
+{% if user.is_authenticated %}
+    <h3>Available Flights</h3>
+    <table class="table table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>Airline</th>
+                <th>Departure City</th>
+                <th>Arrival City</th>
+                <th>Departure Time</th>
+                <th>Arrival Time</th>
+                <th>Price</th>
+                <th>Available Seats</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for flight in flights %}
+            <tr>
+                <td>{{ flight.airline }}</td>
+                <td>{{ flight.departure_city }}</td>
+                <td>{{ flight.arrival_city }}</td>
+                <td>{{ flight.departure_time }}</td>
+                <td>{{ flight.arrival_time }}</td>
+                <td>${{ flight.price }}</td>
+                <td>{{ flight.available_seats }}</td>
+                <td>
+                    <a href="{% url 'flight_booking:create_booking' flight.id %}" class="btn btn-success">Book Now</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="8" class="text-center">No available flights</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>Please login or sign up for further process.</p>
+{% endif %}
+{% endblock %}

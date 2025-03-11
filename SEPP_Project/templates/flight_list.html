@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}Flight Results{% endblock %}
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h3>Available Flights</h3>
+    </div>
+    <div class="card-body">
+        {% if flights %}
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Airline</th>
+                        <th>Departure</th>
+                        <th>Arrival</th>
+                        <th>Price</th>
+                        <th>Available Seats</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for flight in flights %}
+                    <tr>
+                        <td>{{ flight.airline }}</td>
+                        <td>{{ flight.departure_time }}</td>
+                        <td>{{ flight.arrival_time }}</td>
+                        <td>${{ flight.price }}</td>
+                        <td>{{ flight.available_seat_count }}</td>  <!-- ✅ Corrected this line -->
+                        <td>
+                            <a href="{% url 'flight_booking:create_booking' flight.id %}" class="btn btn-primary btn-sm">Book Now</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <p>No flights found matching your criteria.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

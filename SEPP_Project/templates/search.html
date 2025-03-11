@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Search Flights{% endblock %}
+{% block content %}
+
+{% if user.is_authenticated %}
+    <div class="card">
+        <div class="card-header">
+            <h3>Search Flights</h3>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                <div class="row">
+                    {% for field in form %}
+                    <div class="col-md-3 mb-3">
+                        <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                        {{ field }}
+                    </div>
+                    {% endfor %}
+                </div>
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+        </div>
+    </div>
+{% else %}
+    <p>Please login or sign up for search flight.</p>
+{% endif %}
+{% endblock %}
